@@ -40,7 +40,6 @@ def check_node(table, node):
         cursor.execute(query)
         connecion.commit()
         connecion.close()
-        print("append node {}".format(node))
         return node
     else:
         return False
