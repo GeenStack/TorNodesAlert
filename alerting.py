@@ -13,11 +13,18 @@ def get_time():
 
 
 def txt_alerter(table, node):
-    f = open('{}_alert.txt'.format(table), 'a')
     current_time = get_time()
+    f = open('{}_alert.txt'.format(table), 'a')
     f.write(node + "\n")
     f.close()
 
     f = open('{}_alert_log.txt'.format(table), 'a')
     f.write(current_time + " " + node + " has been appended\n")
+    f.close()
+
+
+def log_updating(table, node):
+    current_time = get_time()
+    f = open('{}_update_log.txt'.format(table), 'a')
+    f.write(current_time + " " + node + " has been locked\n")
     f.close()
