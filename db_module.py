@@ -1,5 +1,5 @@
 import sqlite3
-
+import os.path
 
 def insert_query(query):
     connection, cursor = get_connection()
@@ -31,6 +31,8 @@ def init_db():
 
 
 def check_node(table, node):
+#    if not os.path.exists("database.sqlite3"):
+#        init_db()
     connecion, cursor = get_connection()
     query = "SELECT * FROM {} WHERE ip = '{}'".format(table, node)
     cursor.execute(query)

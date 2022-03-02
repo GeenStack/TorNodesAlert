@@ -7,14 +7,14 @@ def main():
     chats = []
     nodes_lists = get_nodes_lists()
     ipv4_nodes = nodes_lists["ipv4_nodes"]
-    ipv6_nodes = nodes_lists["ipv6_nodes"]
+#   ipv6_nodes = nodes_lists["ipv6_nodes"]
 
     for node in ipv4_nodes:
         if check_node("ipv4_nodes", node):
             txt_alerter("ipv4_nodes", node)
             for chat in chats:
                 simple_telegram_alert(node, chat)
-
+'''
     for node in ipv6_nodes:
         if check_node("ipv6_nodes", node):
             txt_alerter("ipv6_nodes", node)
@@ -36,7 +36,7 @@ def main():
             # Alert file to telegram
             send_file_with_unlocked_nodes(log_filename, chat)
             pass
-
+'''
 
 if __name__ == "__main__":
     main()

@@ -1,4 +1,5 @@
 from datetime import datetime
+from alien_vault import verify_ipv4_node
 import requests
 import os
 
@@ -8,24 +9,8 @@ api_url = "https://api.telegram.org/bot{}/".format(token)
 
 def get_time():
     current_time = datetime.now()
-    year = current_time.year
-    month = current_time.month
-    day = current_time.day
-    hour = current_time.hour
-    minute = current_time.minute
-    second = current_time.second
-    return "{} {} {} {}:{}:{}".format(year, month, day, hour, minute, second)
-
-
-def get_undeline_time():
-    current_time = datetime.now()
-    year = current_time.year
-    month = current_time.month
-    day = current_time.day
-    hour = current_time.hour
-    minute = current_time.minute
-    second = current_time.second
-    return "{}_{}_{}_{}_{}_{}".format(year, month, day, hour, minute, second)
+    current_time = current_time.strftime("%d-%m-%Y_%H:%M")
+    return  current_time
 
 
 def txt_alerter(table, node):
@@ -48,7 +33,11 @@ def log_updating(table, node):
 
 def simple_telegram_alert(node, chat):
     current_time = get_time()
-    message = "{} Добавлена нода {}".format(current_time, node)
+    message = "{} Добавлена нода {}\n".format(current_time, node)
+    if verify_ipv4_node(node):
+        message += "Подтверждено через AlienVault"
+    else:
+        message += "Не подтверждено через AlienVault"
     r = requests.get(api_url+"sendMessage?chat_id={}&text={}".format(str(chat), message))
 
 
@@ -59,7 +48,7 @@ def send_file_with_unlocked_nodes(filename, chat):
 
 
 def log_unlocked_nodes(table, unlocked_nodes):
-    current_time = get_undeline_time()
+    current_time = get_time()
     f = open("logs/unlocked_nodes/{}_{}_unlocked.txt".format(current_time, table), "a")
     for node in unlocked_nodes:
         f.write(node+"\n")
