@@ -30,18 +30,18 @@ def get_undeline_time():
 
 def txt_alerter(table, node):
     current_time = get_time()
-    f = open('{}_alert.txt'.format(table), 'a')
+    f = open('logs/alerts/{}_alert.txt'.format(table), 'a')
     f.write(node + "\n")
     f.close()
 
-    f = open('{}_alert_log.txt'.format(table), 'a')
+    f = open('logs/alerts/{}_alert_log.txt'.format(table), 'a')
     f.write(current_time + " " + node + " has been appended\n")
     f.close()
 
 
 def log_updating(table, node):
     current_time = get_time()
-    f = open('{}_update_log.txt'.format(table), 'a')
+    f = open('logs/alerts/{}_update_log.txt'.format(table), 'a')
     f.write(current_time + " " + node + " has been locked\n")
     f.close()
 
@@ -60,8 +60,8 @@ def send_file_with_unlocked_nodes(filename, chat):
 
 def log_unlocked_nodes(table, unlocked_nodes):
     current_time = get_undeline_time()
-    f = open("{}_unlocked.txt".format(current_time), "a")
+    f = open("logs/unlocked_nodes/{}_{}_unlocked.txt".format(current_time, table), "a")
     for node in unlocked_nodes:
         f.write(node+"\n")
     f.close()
-    return "{}_unlocked.txt".format(current_time)
+    return "logs/unlocked_nodes/{}_{}_unlocked.txt".format(current_time, table)

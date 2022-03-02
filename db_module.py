@@ -47,12 +47,12 @@ def check_node(table, node):
 
 def get_unlocked_nodes(table):
     connection, cursor = get_connection()
-    cursor.execute("SELECT ip FROM {} WHERE locked = 'UNLOCKED'")
+    cursor.execute("SELECT ip FROM {} WHERE locked = 'UNLOCKED'".format(table))
     unlocked_nodes = cursor.fetchall()
     connection.close()
     unlocked_nodes_list = []
     for node in unlocked_nodes:
-        unlocked_nodes_list.append(node[0][0])
+        unlocked_nodes_list.append(node[0])
     if unlocked_nodes_list:
         return unlocked_nodes_list
     else:
