@@ -33,11 +33,13 @@ def log_updating(table, node):
 
 def simple_telegram_alert(node, chat):
     current_time = get_time()
-    message = "{} Добавлена нода {}\n".format(current_time, node)
-    if verify_ipv4_node(node):
-        message += "Подтверждено через AlienVault"
-    else:
-        message += "Не подтверждено через AlienVault"
+    message = "{} Добавлен адрес {}\n".format(current_time, node)
+    alien_vault_tags = verify_ipv4_node(node)
+    if alien_vault_tags:
+        message += "Тэги AlienVault:\n"
+        for tag in alien_vault_tags:
+            message += (tag + "\n")
+
     r = requests.get(api_url+"sendMessage?chat_id={}&text={}".format(str(chat), message))
 
 

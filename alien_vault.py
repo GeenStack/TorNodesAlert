@@ -6,8 +6,11 @@ def verify_ipv4_node(node):
     r = requests.get(api_url)
     data = r.json()
     try:
-        if "TOR" in data["pulse_info"]["pulses"][0]["tags"]:
-            return True
+        tags = []
+        for tag in data["pulse_info"]["pulses"][0]["tags"]:
+            tags.append(tag)
+        if tags:
+            return tags
         else:
             return False
     except Exception as e:
