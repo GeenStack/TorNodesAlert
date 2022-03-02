@@ -36,4 +36,4 @@ def simple_telegram_alert(node, chat):
 
     current_time = get_time()
     message = "{} Добавлена нода {}".format(current_time, node)
-    r = requests.get(api_url+"sendMessage?chat_id={}&text={}".format(str(chat), node))
+    r = requests.get(api_url+"sendMessage?chat_id={}&text={}".format(str(chat), message))
