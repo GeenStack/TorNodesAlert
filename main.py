@@ -20,3 +20,23 @@ def main():
             txt_alerter("ipv6_nodes", node)
             for chat in chats:
                 simple_telegram_alert(node, chat)
+
+    unlocked_ipv4_nodes = get_unlocked_nodes("ipv4_nodes")
+    if unlocked_ipv4_nodes:
+        log_filename = log_unlocked_nodes("ipv4_nodes", unlocked_ipv4_nodes)
+        for chat in chats:
+            #Alert file to telegram
+            send_file_with_unlocked_nodes(log_filename, chat)
+            pass
+
+    unlocked_ipv6_nodes = get_unlocked_nodes("ipv6_nodes")
+    if unlocked_ipv4_nodes:
+        log_filename = log_unlocked_nodes("ipv6_nodes", unlocked_ipv6_nodes)
+        for chat in chats:
+            # Alert file to telegram
+            send_file_with_unlocked_nodes(log_filename, chat)
+            pass
+
+
+if __name__ == "__main__":
+    main()

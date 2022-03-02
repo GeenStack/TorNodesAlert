@@ -53,4 +53,7 @@ def get_unlocked_nodes(table):
     unlocked_nodes_list = []
     for node in unlocked_nodes:
         unlocked_nodes_list.append(node[0][0])
-    return unlocked_nodes_list
+    if unlocked_nodes_list:
+        return unlocked_nodes_list
+    else:
+        return False
