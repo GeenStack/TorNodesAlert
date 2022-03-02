@@ -4,6 +4,7 @@ from alerting import *
 
 
 def main():
+    chats = []
     nodes_lists = get_nodes_lists()
     ipv4_nodes = nodes_lists["ipv4_nodes"]
     ipv6_nodes = nodes_lists["ipv6_nodes"]
@@ -11,7 +12,11 @@ def main():
     for node in ipv4_nodes:
         if check_node("ipv4_nodes", node):
             txt_alerter("ipv4_nodes", node)
+            for chat in chats:
+                simple_telegram_alert(node, chat)
 
     for node in ipv6_nodes:
         if check_node("ipv6_nodes", node):
             txt_alerter("ipv6_nodes", node)
+            for chat in chats:
+                simple_telegram_alert(node, chat)

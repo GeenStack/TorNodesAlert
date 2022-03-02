@@ -1,5 +1,5 @@
 from datetime import datetime
-
+import requests
 
 def get_time():
     current_time = datetime.now()
@@ -28,3 +28,12 @@ def log_updating(table, node):
     f = open('{}_update_log.txt'.format(table), 'a')
     f.write(current_time + " " + node + " has been locked\n")
     f.close()
+
+
+def simple_telegram_alert(node, chat):
+    token = ""
+    api_url = "https://api.telegram.org/bot{}/".format(token)
+
+    current_time = get_time()
+    message = "{} Добавлена нода {}".format(current_time, node)
+    r = requests.get(api_url+"sendMessage?chat_id={}&text={}".format(str(chat), node))
