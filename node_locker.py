@@ -11,3 +11,8 @@ def lock_node(table, node):
     connection.close()
     log_updating(table, node)
     return True
+
+def lock_nodes_list(table, list_to_block):
+    for node in list_to_block:
+        lock_node(table, node)
+    return True
