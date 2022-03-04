@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 from get_nodes_list import *
 from db_module import *
 from alerting import *
