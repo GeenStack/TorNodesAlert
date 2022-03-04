@@ -10,8 +10,6 @@ def verify_ipv4_node(node):
         for tag in data["pulse_info"]["pulses"][0]["tags"]:
             tags.append(tag)
         return {"tags":tags, "country_name":data["country_name"]}
-        else:
-            return False
     except Exception as e:
         return False
 
