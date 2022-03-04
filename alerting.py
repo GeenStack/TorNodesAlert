@@ -1,10 +1,9 @@
 from datetime import datetime
 from alien_vault import verify_ipv4_node
+from telegram_config import *
 import requests
 import os
 
-token = ""
-api_url = "https://api.telegram.org/bot{}/".format(token)
 
 
 def get_time():
@@ -31,7 +30,7 @@ def log_updating(table, node):
     f.close()
 
 
-def simple_telegram_alert(node, chat):
+def simple_telegram_alert(node):
     current_time = get_time()
     message = "{} Добавлен адрес {}\n".format(current_time, node)
     alien_vault_tags = verify_ipv4_node(node)
@@ -40,14 +39,15 @@ def simple_telegram_alert(node, chat):
         for tag in alien_vault_tags:
             message += (tag + "\n")
 
-    r = requests.get(api_url+"sendMessage?chat_id={}&text={}".format(str(chat), message))
+    for chat in CHATS:
+        r = requests.get(API_URL+"sendMessage?chat_id={}&text={}".format(str(chat), message))
 
-
+"""
 def send_file_with_unlocked_nodes(filename, chat):
     #Костыль
     cmd = "curl  -F \"chat_id={}\" -F document=@{} {}sendDocument"
     os.system(cmd.format(chat, filename, api_url))
-
+"""
 
 def log_unlocked_nodes(table, unlocked_nodes):
     current_time = get_time()
