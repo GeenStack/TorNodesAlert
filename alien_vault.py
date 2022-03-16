@@ -11,6 +11,6 @@ def verify_ipv4_node(node):
             tags.append(tag)
         return {"tags":tags, "country_name":data["country_name"]}
     except Exception as e:
-        return False
+        return {"tags":[], "country_name":data["country_name"]}
 
 
